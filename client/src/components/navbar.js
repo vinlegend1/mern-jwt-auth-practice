@@ -12,6 +12,7 @@ const Navbar = (props) => {
                 setUser(data.user);
                 setIsAuthenticated(false);
             }
+            
         })
     }
 

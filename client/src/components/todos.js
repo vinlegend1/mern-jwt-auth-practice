@@ -1,6 +1,12 @@
 import React, { useState, useContext, useEffect } from 'react'
+import TodoItem from './todoItem';
+import TodoService from '../services/todoService';
+import { AuthContext } from '../context/authContext';
 
-const todos = () => {
+
+const Todos = (props) => {
+    const [todo, setTodo] = useState({ name: "" })
+    
     return (
         <div>
             
@@ -8,4 +14,4 @@ const todos = () => {
     )
 }
 
-export default todos
+export default Todos;

@@ -5,6 +5,7 @@ import Message from './message';
 const Login = (props) => {
     const [user, setUser] = useState({ username: "", password: "", role: "" });
     const [message, setMessage] = useState(null);
+    const [msgErr, setMsgErr] = useState(false);
     let timerID = useRef(null);
 
     useEffect(() => {
@@ -28,7 +29,9 @@ const Login = (props) => {
         AuthService.register(user).then(data => {
             // console.log(data);
             const { msgErr, msgBody } = data;
-            setMessage(message);
+            // console.log(msgBody)
+            setMsgErr(msgErr)
+            setMessage(msgBody);
             resetForm();
             if (!msgErr) {
                 timerID = setTimeout(() => {
@@ -51,7 +54,8 @@ const Login = (props) => {
                 <input type="text" value={user.role} onChange={onChange} name="role" className="form-control" placeholder="Enter role..." />
                 <button className="btn btn-lg btn-primary btn-block" type="submit">Register</button>
             </form>
-            {message ? <Message message={message}></Message> : null}
+            <br />
+            {message ? <Message message={message} err={msgErr}></Message> : null}
         </div>
     )
 }

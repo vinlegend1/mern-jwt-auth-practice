@@ -4,7 +4,7 @@ const Message = (props) => {
 
     const getStyle = (props) => {
         let baseClass = "alert";
-        if (props.message.msgErr) {
+        if (props.err) {
             baseClass += " alert-danger";
         } else {
             baseClass += " alert-primary";
@@ -15,7 +15,7 @@ const Message = (props) => {
 
     return (
         <div className={getStyle(props)} role="alert">
-            {props.message.msgBody}
+            {props.message}
         </div>
     )
 }
