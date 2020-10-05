@@ -2,7 +2,6 @@ const express = require('express');
 const mongoose = require('mongoose');
 const path = require('path');
 const flash = require('connect-flash');
-const session = require('express-session');
 const cors = require('cors');
 const passport = require('passport');
 const cookieParser = require('cookie-parser');
@@ -20,19 +19,13 @@ connection.once('open', () => {
   console.log('Connected to MongoDB successfully!')
 })
 
+require('./passport');
 app.use(cookieParser());
 app.use(cors());
 app.use(flash());
 app.use(passport.initialize());
-app.use(passport.session());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
-app.use(session({
-    secret: 'keyboard cat',
-    resave: false,
-    saveUninitialized: true,
-    cookie: { secure: true }
-}));
 
 // Routes
 const userRouter = require('./routes/user');

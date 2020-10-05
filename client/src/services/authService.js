@@ -3,7 +3,6 @@ export default {
         return fetch('/api/user/login', {
             method: 'POST',
             body: JSON.stringify(user),
-            credentials: 'include',
             headers: {
                 'Content-Type': 'application/json'
             }
@@ -26,9 +25,7 @@ export default {
           .then(data => data);
     },
     logout: () => {
-        return fetch('/api/user/logout', {
-            credentials: "include"
-          }).then(res => res.json()).then(data => data);
+        return fetch('/api/user/logout').then(res => res.json()).then(data => data);
     },
     isAuthenticated: () => {
         return fetch('/api/user/authenticated').then(res => {

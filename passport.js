@@ -11,20 +11,6 @@ const cookieFromExtractor = req => {
     return token;
 }
 
-passport.use(new LocalStrategy((username, password, done) => {
-    User.findOne({ username: username }, (err, user) => {
-        // something went wrong with database
-        if (err) return done(err);
-
-        // comment
-        if (!user) {
-            return done(null, false);
-        }
-        user.comparePassword(password, done)
-        
-    })
-}));
-
 // if there is a bug, try putting it above the localstrategy
 passport.use(new JWTStrategy({
     jwtFromRequest: cookieFromExtractor,
@@ -40,3 +26,18 @@ passport.use(new JWTStrategy({
         }
     })
 }))
+
+passport.use(new LocalStrategy((username, password, done) => {
+    User.findOne({ username: username }, (err, user) => {
+        // something went wrong with database
+        if (err) return done(err);
+
+        // comment
+        if (!user) {
+            return done(null, false);
+        }
+        user.comparePassword(password, done)
+        
+    })
+}));
+
